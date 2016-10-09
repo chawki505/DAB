@@ -38,15 +38,15 @@ public class Client {
         return nom;
     }
 
+    //affiche toute les info des ou de compte(s) du client
     public void infoCompte() {
         for (int i = 0; i < comptes.size(); i++) {
-            System.out.println("---> compte n°:" + (i + 1) + " [id:" + comptes.get(i).getIdcompte() + "]" + "Solde = " + comptes.get(i).getSolde() + " avec un taux d'interet de " + comptes.get(i).calculeInteret() + "%");
+            System.out.println("---> compte n°:" + (i + 1) + " [id:" + comptes.get(i).getIdcompte() + "]" + "Solde = " + comptes.get(i).getSolde() + " DA, avec un taux d'interet de " + comptes.get(i).calculeInteret() + "%");
         }
 
     }
-
+    //n'affiche que le numero du compte et sont solde
     public void afficherCompte() {
-
         for (int i = 0; i < comptes.size(); i++) {
             System.out.println("compte " + (i + 1) + " : " + comptes.get(i).getSolde() + " DA");
         }
@@ -96,17 +96,47 @@ public class Client {
                     choixCompte = 1;
 
                     choixCompte = getChoixCompte(choixCompte);
-
-                    comptes.get(choixCompte - 1).retrait(montantmoin);
-                    System.out.println("Le retrait a été effectué\n");
-                    infoCompte();
-
+                    if (comptes.get(choixCompte - 1).getSolde() < montantmoin)
+                        System.out.println("Retrait impossible , montant superieur au solde du compte !");
+                    else {
+                        comptes.get(choixCompte - 1).retrait(montantmoin);
+                        System.out.println("Le retrait a été effectué\n");
+                        infoCompte();
+                    }
                     break;
 
 
                 case "3":
 
-                    //pas encore fait (pas tres compliquer manque de temps)
+                    if (nombreCompte > 1) {
+                        Scanner clavier = new Scanner(System.in);
+                        System.out.print("De quel montant ? : ");
+                        double montantVir = clavier.nextDouble();
+
+                        System.out.println("\nVos comptes :");
+                        afficherCompte();
+
+                        System.out.print("\nCompte emetteur : ");
+                        int emetteur = clavier.nextInt();
+
+                        System.out.print("Compte destinataire : ");
+                        int destinataire = clavier.nextInt();
+
+                        // permet de tester si le numero de compte en saisi ne depasse pas le nombre de compte total
+                        boolean test1 = (emetteur <= nombreCompte) && (destinataire <= nombreCompte);
+                        // permet de tester si le montant debiter du compte emetteur est inferieur au solde de se compte
+                        boolean test2 = comptes.get(emetteur-1).getSolde() >= montantVir;
+
+                        if (test1 && nombreCompte > 1 && test2) {
+                            comptes.get(emetteur-1).virer(montantVir, comptes.get(destinataire-1));
+                            System.out.println("\nLe virement a étté effectué\n");
+                            infoCompte();
+
+                        } else {
+                            System.out.println("\nUn des comptes n'existe pas ou le montant est superieur au solde du compte ! \n");
+                        }
+                    } else System.out.println("Vous n'avez qu'un seul compte ! \n");
+
 
                     break;
 
@@ -134,8 +164,10 @@ public class Client {
 
             }
         }
+
     }
 
+    //methode pour choisir un compte (pour eviter les doublant de code)
     private int getChoixCompte(int choixCompte) {
         if (nombreCompte > 1) {
             System.out.println("\nSur quelle compte ? : ");
