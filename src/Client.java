@@ -37,7 +37,7 @@ public class Client {
     public String getNom() {
         return nom;
     }
-
+/*certaines fonctions n'appartiennes pas à Client comme Menu */
     //affiche toute les info des ou de compte(s) du client
     public void infoCompte() {
         for (int i = 0; i < comptes.size(); i++) {
