@@ -16,8 +16,6 @@ public class DAB {
         boolean fin = false;
         while (!fin) {
 
-            //
-
             System.out.println("\n        __________________________________________     ");
             System.out.println("               [| Bienvenu dans le DAB |] ");
             System.out.println("      +-------------------  Menu  --------------------+  ");

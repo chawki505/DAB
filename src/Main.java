@@ -12,7 +12,7 @@ public class Main {
 
 }
 //-----------membre du groupe 3-----------------------
-//CHOUIB Chawki
+// CHOUIB Chawki
 // DJEZIRI Ibtissem
 // MAKRELOUFI Yasmine
-//RABAH Ahmed Imed Eddine 
+// RABAH Ahmed Imed Eddine
