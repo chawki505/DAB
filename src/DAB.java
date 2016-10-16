@@ -15,12 +15,8 @@ public class DAB {
     public void menuDAB() {
         boolean fin = false;
         while (!fin) {
-//            System.out.println("\nBienvenu au DAB de chawki ");
-//            System.out.println("Que voulez vous faire ?\n");
-//            System.out.println("1) afficher le bilant de la banque  ");
-//            System.out.println("2) creer un nouveau client ");
-//            System.out.println("3) faire des operation sur un client");
-//            System.out.println("4) quitter la banque ");
+
+            //
 
             System.out.println("\n        __________________________________________     ");
             System.out.println("               [| Bienvenu dans le DAB |] ");
